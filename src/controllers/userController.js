@@ -116,7 +116,7 @@ export const register = async (req, res) => {
 		const newUser = await UserModel.create({
 			name,
 			email,
-			password,
+			password: hashedPassword,
 		});
 
 		// Get user id from user
