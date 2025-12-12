@@ -15,8 +15,8 @@ router.post('/logout', authApi, AuthController.logout);
 // POST User register route
 router.post('/register', AuthController.register);
 
-// GET Refresh session route
-router.get('/refresh', AuthController.refresh);
+// POST Refresh session route
+router.post('/refresh', AuthController.refresh);
 
 // Export router
 export default router;

@@ -1,24 +1,21 @@
-let accessToken;
-window.addEventListener('DOMContentLoaded', async (event) => {
-	try {
-		const response = await axios.get('/auth/refresh');
-		accessToken = response.data.accessToken;
-	} catch (error) {
-		console.error(error.message);
-	}
-});
+import apiClient, { clearAccessToken } from '../services/apiClient.js';
 
+// Handle logout button click event
 const logoutButton = document.getElementById('logout-button');
 logoutButton.addEventListener('click', async (event) => {
 	try {
-		const response = await axios.post('/auth/logout', null, {
-			headers: {
-				Authorization: `Bearer ${accessToken}`,
-			},
-		});
+		// POST logout user
+		await apiClient.post('/auth/logout');
+
+		// Clear access token from api client
+		clearAccessToken();
+
+		// Redirect to login page
 		alert('Logout successful');
 		window.location.href = '/login';
 	} catch (error) {
+		// Handle logout failed
 		console.error(error.message);
+		alert('Logout unsuccessful');
 	}
 });

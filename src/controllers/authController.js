@@ -194,19 +194,10 @@ export const refresh = (req, res) => {
 		});
 	}
 
+	// Generate new access token
+	let accessToken;
 	try {
-		// Generate new access token
-		const accessToken = JWT.generateAccessToken({ userId: decoded.userId });
-
-		// Respond with new access token
-		console.log(
-			`User id ${decoded.userId} access token refresh successful on ${new Date().toLocaleString()}`
-		);
-		return res.status(200).json({
-			success: true,
-			message: 'Refresh successful',
-			accessToken,
-		});
+		accessToken = JWT.generateAccessToken({ userId: decoded.userId });
 	} catch (error) {
 		// Handle access token generation failure
 		console.error(
@@ -219,4 +210,14 @@ export const refresh = (req, res) => {
 			message: 'Internal server error',
 		});
 	}
+
+	// Respond with new access token
+	console.log(
+		`User id ${decoded.userId} access token refresh successful on ${new Date().toLocaleString()}`
+	);
+	return res.status(200).json({
+		success: true,
+		message: 'Refresh successful',
+		accessToken,
+	});
 };
