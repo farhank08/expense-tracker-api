@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0"
+		/>
+		<title>Expense Tracker</title>
+		<!-- Styles and scripts -->
+		<link
+			rel="stylesheet"
+			href="../styles/globals.css"
+		/>
+		<script
+			src="../scripts/login.js"
+			type="module"
+			defer
+		></script>
+		<!-- CDN Resources -->
+		<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+	</head>
+	<body>
+		<header><h1>Login Page</h1></header>
+		<nav></nav>
+		<main>
+			<form id="login-form">
+				<label for="login-email">Email</label>
+				<input
+					name="email"
+					id="login-email"
+					type="email"
+					required
+				/>
+				<label for="login-password">Password</label>
+				<input
+					type="password"
+					name="password"
+					id="login-password"
+					required
+				/>
+				<button type="submit">Login</button>
+			</form>
+		</main>
+		<footer></footer>
+	</body>
+</html>

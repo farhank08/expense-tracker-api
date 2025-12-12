@@ -17,4 +17,4 @@ export const initDb = async () => {
 	client.connection.on('error', () => {
 		throw new Error('MongoDB connection attempt failed');
 	});
-};
+};                     

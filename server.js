@@ -6,8 +6,9 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 
 import { initDb } from './src/databases/dbClient.js';
-import UserRouter from './src/routers/apiRouters/userRouter.js';
-import ExpenseRouter from './src/routers/apiRouters/expenseRouter.js';
+import { authApi } from './src/middlewares/authenticator.js';
+import AuthRouter from './src/routers/authRouter.js';
+import ExpenseRouter from './src/routers/expenseRouter.js';
 import ViewRouter from './src/routers/viewRouter.js';
 
 // Load environment variables
@@ -47,11 +48,11 @@ app.get('/favicon.ico', (req, res) => res.sendStatus(204));
 // Serve static files
 app.use(express.static(publicDir));
 
-// Serve User API routes
-app.use('/api', UserRouter);
+// Serve Authentication routes
+app.use('/auth', AuthRouter);
 
 // Serve Expense API routes
-app.use('/api', ExpenseRouter);
+app.use('/api', authApi, ExpenseRouter);
 
 // Serve view routes
 app.use('/', ViewRouter);
