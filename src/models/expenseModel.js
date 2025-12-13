@@ -12,14 +12,6 @@ const categoryEnums = [
 
 const expenseSchema = new mongoose.Schema(
 	{
-		title: {
-			type: String,
-			trim: true,
-		},
-		description: {
-			type: String,
-			trim: true,
-		},
 		category: {
 			type: String,
 			required: true,
@@ -30,6 +22,10 @@ const expenseSchema = new mongoose.Schema(
 			type: Number,
 			required: true,
 		},
+		description: {
+			type: String,
+			trim: true,
+		},
 		purchasedAt: {
 			type: Date,
 			required: true,
@@ -38,7 +34,7 @@ const expenseSchema = new mongoose.Schema(
 		userId: {
 			type: String,
 			required: true,
-		}
+		},
 	},
 	{
 		timestamps: true,
