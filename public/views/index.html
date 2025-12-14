@@ -49,6 +49,53 @@
 			</nav>
 			<main>
 				<div class="container">
+					<form id="search-form">
+						<div class="group">
+							<label for="search-category">Category</label>
+							<select
+								id="search-category"
+								name="category"
+							>
+								<option
+									value=""
+									selected
+								>
+									All
+								</option>
+								<option value="Groceries">Groceries</option>
+								<option value="Leisure">Leisure</option>
+								<option value="Electronics">Electronics</option>
+								<option value="Utilities">Utilities</option>
+								<option value="Clothing">Clothing</option>
+								<option value="Health">Health</option>
+								<option value="Other">Other</option>
+							</select>
+						</div>
+						<div class="group">
+							<label for="expense-from">From</label>
+							<input
+								type="date"
+								id="expense-from"
+								name="from-date"
+							/>
+						</div>
+						<div class="group">
+							<label for="expense-to">To</label>
+							<input
+								type="date"
+								id="expense-to"
+								name="to-date"
+							/>
+						</div>
+						<div class="actions">
+							<button
+								type="submit"
+								class="utility"
+							>
+								Search
+							</button>
+						</div>
+					</form>
 					<ul
 						id="expenses-list"
 						class="container"

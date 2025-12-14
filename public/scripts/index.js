@@ -44,11 +44,53 @@ logoutButton.addEventListener('click', async (event) => {
 	}
 });
 
-// Load expenses list
+// Handle search form submit event
+const searchForm = document.getElementById('search-form');
+searchForm.addEventListener('submit', async (event) => {
+	// Prevent default form submission
+	event.preventDefault();
+
+	// Get form data
+	const formData = new FormData(searchForm);
+	const category = formData.get('category');
+	const fromDate = formData.get('from-date');
+	const toDate = formData.get('to-date');
+
+	// Build query parameters
+	const params = {};
+	if (category) params.category = category;
+	if (fromDate) params.fromDate = fromDate;
+	if (toDate) params.toDate = toDate;
+
+	let expenses;
+	try {
+		// GET filtered expenses
+		const response = await apiClient.get('/expenses', { params });
+		expenses = response.data.payload;
+	} catch (error) {
+		// Handle fetch filtered expenses failed error
+		console.error(error.message);
+		return alert('Failed to load expenses');
+	}
+
+	// Load filtered expenses into the UI
+	loadExpenses(expenses);
+});
+
+// Helper: Load expenses list
 const expensesList = document.getElementById('expenses-list');
 const loadExpenses = (expenses) => {
 	// Clear existing expenses
 	expensesList.innerHTML = '';
+
+	if (expenses.length === 0) {
+		// Show no expenses message
+		const noExpensesMessage = document.createElement('p');
+		noExpensesMessage.classList.add('expense-empty-message');
+		noExpensesMessage.innerText = 'No expenses found. Click "Create" to add one.';
+		expensesList.appendChild(noExpensesMessage);
+		return;
+	}
 
 	// Populate expenses list
 	expenses.forEach((expense) => {
@@ -62,7 +104,6 @@ const loadExpenses = (expenses) => {
 			window.location.href = `/expense/${expense._id}`;
 		});
 
-		// TODO: Create and append expense details elements
 		// Expense category
 		const category = document.createElement('p');
 		category.classList.add('expense-category');
@@ -72,7 +113,9 @@ const loadExpenses = (expenses) => {
 		// Expense purchase date
 		const purchaseDate = document.createElement('small');
 		purchaseDate.classList.add('expense-date');
-		purchaseDate.innerText = `Purchase Date: ${new Date(expense.purchasedAt).toLocaleDateString()}`;
+		purchaseDate.innerText = `Purchase Date: ${new Date(expense.purchasedAt).toLocaleDateString(
+			'en-GB'
+		)}`;
 		listItem.appendChild(purchaseDate);
 
 		// Expense cost
