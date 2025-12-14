@@ -1,5 +1,29 @@
 import apiClient, { clearAccessToken } from '../services/apiClient.js';
 
+// Fetch and display all user expenses
+window.addEventListener('DOMContentLoaded', async () => {
+	let expenses;
+	try {
+		// GET all expenses
+		const response = await apiClient.get('/expenses');
+		expenses = response.data.payload;
+	} catch (error) {
+		// Handle fetch expenses failed
+		console.error(error.message);
+		return alert('Failed to load expenses');
+	}
+
+	// Load expenses into the UI
+	loadExpenses(expenses);
+});
+
+// Handle create button click event
+const createButton = document.getElementById('create-button');
+createButton.addEventListener('click', () => {
+	// Redirect to create page
+	window.location.href = '/expense';
+});
+
 // Handle logout button click event
 const logoutButton = document.getElementById('logout-button');
 logoutButton.addEventListener('click', async (event) => {
@@ -19,3 +43,51 @@ logoutButton.addEventListener('click', async (event) => {
 		alert('Logout unsuccessful');
 	}
 });
+
+// Load expenses list
+const expensesList = document.getElementById('expenses-list');
+const loadExpenses = (expenses) => {
+	// Clear existing expenses
+	expensesList.innerHTML = '';
+
+	// Populate expenses list
+	expenses.forEach((expense) => {
+		// Create list item element
+		const listItem = document.createElement('li');
+		listItem.classList.add('expense-item');
+
+		// Handle list item click event
+		listItem.addEventListener('click', () => {
+			// Redirect to expense detail page
+			window.location.href = `/expense/${expense._id}`;
+		});
+
+		// TODO: Create and append expense details elements
+		// Expense category
+		const category = document.createElement('p');
+		category.classList.add('expense-category');
+		category.innerText = expense.category;
+		listItem.appendChild(category);
+
+		// Expense purchase date
+		const purchaseDate = document.createElement('small');
+		purchaseDate.classList.add('expense-date');
+		purchaseDate.innerText = `Purchase Date: ${new Date(expense.purchasedAt).toLocaleDateString()}`;
+		listItem.appendChild(purchaseDate);
+
+		// Expense cost
+		const cost = document.createElement('p');
+		cost.classList.add('expense-cost');
+		cost.innerText = `Cost: $${expense.cost.toFixed(2)}`;
+		listItem.appendChild(cost);
+
+		// Expense description
+		const description = document.createElement('p');
+		description.classList.add('expense-description');
+		description.innerText = expense.description;
+		listItem.appendChild(description);
+
+		// Append expense to the list
+		expensesList.appendChild(listItem);
+	});
+};

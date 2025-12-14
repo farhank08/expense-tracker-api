@@ -41,12 +41,6 @@ export const authView = async (req, res, next) => {
 	// Get session token from cookie
 	const sessionToken = req.cookies.sessionToken;
 
-	if (!sessionToken) {
-		// Redirect to login page
-		console.error(`Missing session token at ${req.path} on ${new Date().toLocaleString()}`);
-		return res.redirect('/login');
-	}
-
 	try {
 		// Verify session token
 		JWT.verifySessionToken(sessionToken);
@@ -55,13 +49,14 @@ export const authView = async (req, res, next) => {
 		return next();
 	} catch (error) {
 		// Remove invalid or expired session token from cookie
-		res.clearCookie('sessionToken');
+		if (sessionToken) {
+			res.clearCookie('sessionToken');
+		}
 
 		// Handle invalid or expired session token error
 		console.warn(
 			`Invalid session token at ${req.path} on ${new Date().toLocaleString()} : ${error.message}`
 		);
-		console.log('Attempting session token refresh....');
 	}
 
 	// Get refresh token from cookie
@@ -125,5 +120,10 @@ export const authView = async (req, res, next) => {
 	});
 
 	// Reroute on success
+	console.log(
+		`Refreshed session token for User id ${decoded.userId} at ${
+			req.path
+		} on ${new Date().toLocaleString()}`
+	);
 	return next();
 };

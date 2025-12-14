@@ -13,13 +13,6 @@ const viewsDir = path.resolve(__dirname, '../../', 'public', 'views');
 // Initialize express router
 const router = Router();
 
-// Serve index page
-router.get('/', authView, (req, res, next) => {
-	return res.sendFile(path.join(viewsDir, 'index.html'), (error) => {
-		if (error) return next();
-	});
-});
-
 // Serve login page
 router.get('/login', (req, res, next) => {
 	// Get session token from cookie
@@ -44,6 +37,27 @@ router.get('/login', (req, res, next) => {
 			if (error) return next();
 		});
 	}
+});
+
+// Serve index page
+router.get('/', authView, (req, res, next) => {
+	return res.sendFile(path.join(viewsDir, 'index.html'), (error) => {
+		if (error) return next();
+	});
+});
+
+// Serve expense create page
+router.get('/expense', authView, (req, res, next) => {
+	return res.sendFile(path.join(viewsDir, 'expense.html'), (error) => {
+		if (error) return next();
+	});
+});
+
+// Serve expense edit page
+router.get('/expense/:id', authView, (req, res, next) => {
+	return res.sendFile(path.join(viewsDir, 'expense.html'), (error) => {
+		if (error) return next();
+	});
 });
 
 // Export router

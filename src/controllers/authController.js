@@ -186,7 +186,7 @@ export const refresh = (req, res) => {
 
 		// Handle invalid or expired token error
 		console.error(
-			`Access token refresh failed on ${new Date().toLocaleString()} : ${error.message}`
+			`Access token refresh failed on ${new Date().toLocaleString()}\n${error.message}`
 		);
 		return res.status(401).json({
 			success: false,

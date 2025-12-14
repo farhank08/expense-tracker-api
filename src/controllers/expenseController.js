@@ -38,7 +38,7 @@ export const getExpenses = async (req, res) => {
 		console.error(
 			`User id ${userId} request at ${req.method} ${
 				req.path
-			} failed on ${new Date().toLocaleString()} : ${error.message}`
+			} failed on ${new Date().toLocaleString()}\n${error.message}`
 		);
 		return res.status(500).json({
 			success: false,
@@ -65,7 +65,7 @@ export const getExpenseById = async (req, res) => {
 	const userId = req.userId;
 
 	// Get expense id from request path
-	const expenseId = req.path.split('/').filter(Boolean)[2]; // ['api', 'expenses', 123]
+	const expenseId = req.path.split('/').filter(Boolean)[1]; // ['expenses', 123]
 
 	// Create filter to find expense
 	const filter = {
@@ -82,7 +82,7 @@ export const getExpenseById = async (req, res) => {
 		console.error(
 			`User id ${userId} request at ${req.method} ${
 				req.path
-			} failed on ${new Date().toLocaleString()} : ${error.message}`
+			} failed on ${new Date().toLocaleString()}\n${error.message}`
 		);
 		return res.status(500).json({
 			success: false,
@@ -121,16 +121,22 @@ export const createExpense = async (req, res) => {
 	// Get user id from request
 	const userId = req.userId;
 
+	// Create query to create expense
+	const query = {
+		...req.body,
+		userId,
+	};
+
 	// Create new expense in database using request data
 	let newExpense;
 	try {
-		newExpense = await ExpenseModel.create(req.body);
+		newExpense = await ExpenseModel.create(query);
 	} catch (error) {
 		// Handle database query error
 		console.error(
 			`User id ${userId} request at ${req.method} ${
 				req.path
-			} failed on ${new Date().toLocaleString()} : ${error.message}`
+			} failed on ${new Date().toLocaleString()}\n${error.message}`
 		);
 		return res.status(500).json({
 			success: false,
@@ -157,7 +163,7 @@ export const updateExpense = async (req, res) => {
 	const userId = req.userId;
 
 	// Get expense id from request path
-	const expenseId = req.path.split('/').filter(Boolean)[2]; // ['api', 'expenses', 123]
+	const expenseId = req.path.split('/').filter(Boolean)[1]; // ['expenses', 123]
 
 	// Create filter to find expense
 	const filter = {
@@ -180,7 +186,7 @@ export const updateExpense = async (req, res) => {
 		console.error(
 			`User id ${userId} request at ${req.method} ${
 				req.path
-			} failed on ${new Date().toLocaleString()} : ${error.message}`
+			} failed on ${new Date().toLocaleString()}\n${error.message}`
 		);
 		return res.status(500).json({
 			success: false,
@@ -207,7 +213,7 @@ export const deleteExpense = async (req, res) => {
 	const userId = req.userId;
 
 	// Get expense id from request path
-	const expenseId = req.path.split('/').filter(Boolean)[2]; // ['api', 'expenses', 123]
+	const expenseId = req.path.split('/').filter(Boolean)[1]; // ['expenses', 123]
 
 	// Create filter to find expense
 	const filter = {
@@ -215,8 +221,8 @@ export const deleteExpense = async (req, res) => {
 		userId,
 	};
 
-  // Delete expense from database
-  let result;
+	// Delete expense from database
+	let result;
 	try {
 		result = await ExpenseModel.deleteOne(filter);
 	} catch (error) {
@@ -224,7 +230,7 @@ export const deleteExpense = async (req, res) => {
 		console.error(
 			`User id ${userId} request at ${req.method} ${
 				req.path
-			} failed on ${new Date().toLocaleString()} : ${error.message}`
+			} failed on ${new Date().toLocaleString()}\n${error.message}`
 		);
 		return res.status(500).json({
 			success: false,
@@ -232,8 +238,8 @@ export const deleteExpense = async (req, res) => {
 		});
 	}
 
-  // Handle expense not found error
-  if (result.deletedCount === 0) {
+	// Handle expense not found error
+	if (result.deletedCount === 0) {
 		console.error(
 			`User id ${userId} request at ${req.method} ${
 				req.path

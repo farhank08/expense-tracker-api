@@ -3,7 +3,7 @@ let accessToken = null;
 
 // Create Axios API client
 const apiClient = axios.create({
-	baseUrl: '/api',
+	baseURL: '/api',
 	withCredentials: true,
 });
 

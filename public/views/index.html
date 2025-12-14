@@ -21,9 +21,48 @@
 		<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 	</head>
 	<body>
-		<header><h1>Index Page</h1></header>
-		<nav></nav>
-		<main><button id="logout-button">Logout</button></main>
-		<footer></footer>
+		<div id="app">
+			<header>
+				<div class="container">
+					<a
+						id="logo"
+						href="/"
+						>Expense Tracker</a
+					>
+				</div>
+			</header>
+			<nav>
+				<div class="container">
+					<button
+						id="create-button"
+						class="primary"
+					>
+						Create
+					</button>
+					<button
+						id="logout-button"
+						class="danger"
+					>
+						Logout
+					</button>
+				</div>
+			</nav>
+			<main>
+				<div class="container">
+					<ul
+						id="expenses-list"
+						class="container"
+					></ul>
+				</div>
+			</main>
+			<footer>
+				<div class="container">
+					<p class="app-footer__disclaimer">
+						This application is a demonstration project built to showcase backend and full-stack
+						development skills, including authentication, API design, and application architecture.
+					</p>
+				</div>
+			</footer>
+		</div>
 	</body>
 </html>
