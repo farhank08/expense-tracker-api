@@ -59,7 +59,7 @@ app.use('/', ViewRouter);
 
 // Handle unhandled routes
 app.use((req, res) => {
-	console.error(`Unhandled route ${req.path}`);
+	console.error(`Unhandled route ${req.method} ${req.path}`);
 	return res.status(404).json({
 		success: false,
 		message: 'Route not found',
