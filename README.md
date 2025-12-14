@@ -7,6 +7,8 @@
 
 A RESTful **Expense Tracker API** built with **Node.js (v25)**, **Express**, and **MongoDB (Mongoose)**. The API supports secure user authentication using **JWT (access + refresh tokens)**, cookie-based sessions, and full CRUD operations for managing personal expenses. It follows an MVC-style project structure and is designed to be consumed by a frontend client (Demo included).
 
+Project from: https://roadmap.sh/projects/expense-tracker-api
+
 ---
 
 ## 📦 Features
