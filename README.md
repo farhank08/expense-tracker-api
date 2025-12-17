@@ -40,8 +40,9 @@ JWT_REFRESH_SECRET=your_refresh_token_secret
 
 - `PORT` – Port the server runs on
 - `MONGODB_URI` – MongoDB connection string
-- `JWT_SECRET` – Secret for signing access tokens
+- `JWT_ACCESS_SECRET` – Secret for signing access tokens
 - `JWT_REFRESH_SECRET` – Secret for signing refresh tokens
+- `JWT_SESSION_SECRET` – Secret for signing session tokens
 
 ## Running the Application
 
