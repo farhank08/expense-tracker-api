@@ -6,8 +6,8 @@ Project from https://roadmap.sh/projects/expense-tracker-api
 
 ## Prerequisites
 
-- Node.js **v25** or higher
-- npm
+- Node.js
+- Express
 - MongoDB (local instance or managed service such as MongoDB Atlas)
 
 ## Installation
