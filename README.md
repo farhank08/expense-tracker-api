@@ -57,36 +57,6 @@ The server will start at:
 http://localhost:3000
 ```
 
-## Application Structure
-
-```text
-Expense Tracker API/
-├── server.js
-├── package.json
-├── public/
-│   ├── scripts/
-│   ├── services/
-│   ├── styles/
-│   └── views/
-└── src/
-    ├── controllers/
-    │   ├── authController.js
-    │   └── expenseController.js
-    ├── databases/
-    │   └── dbClient.js
-    ├── middlewares/
-    │   └── authenticator.js
-    ├── models/
-    │   ├── expenseModel.js
-    │   └── userModel.js
-    ├── routers/
-    │   ├── authRouter.js
-    │   ├── expenseRouter.js
-    │   └── viewRouter.js
-    └── utils/
-        └── jwt.js
-```
-
 ## Authentication
 
 - Uses **JWT access tokens** for API authorization
@@ -100,6 +70,7 @@ Expense Tracker API/
 | POST | `/auth/register` | Register a new user |
 | POST | `/auth/login` | Log in and receive tokens |
 | POST | `/auth/logout` | Log out and clear cookies |
+| POST | `/auth/refresh` | Refresh access token |
 
 ## Expense API
 
