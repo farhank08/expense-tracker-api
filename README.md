@@ -2,6 +2,8 @@
 
 A Node.js **RESTful API** for tracking personal expenses with **user authentication**, built using **Express** and **MongoDB (Mongoose)**. The application supports JWT-based authentication, HTTP-only cookies, and full CRUD operations for expenses, and also serves basic HTML views for login and expense management.
 
+Project from https://roadmap.sh/projects/expense-tracker-api
+
 ## Prerequisites
 
 - Node.js **v25** or higher
